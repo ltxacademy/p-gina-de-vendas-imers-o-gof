@@ -579,5 +579,48 @@ document.querySelectorAll('.faq-q').forEach(function(q){
   });
 });
 </script>
+<script>
+(function() {
+    const utmParamQueryString = new URLSearchParams(window.location.search);
+    const ignoredParams = [
+        'e_search_props',
+        's',
+        'elementor_library',
+        'elementor-id',
+        'preview_id',
+        'preview_nonce',
+        'preview',
+        'p',
+        'post_type'
+    ];
+
+    if (utmParamQueryString.toString()) {
+        ignoredParams.forEach(param => utmParamQueryString.delete(param));
+
+        var navLinks = document.querySelectorAll('a');
+        navLinks.forEach(function(item) {
+            var href = item.getAttribute('href');
+            if (!item.href.includes('#elementor-action') &&
+                !item.classList.contains('no-utm') &&
+                href &&
+                href !== '' &&
+                !href.startsWith('#')) {
+
+                var anchorIndex = item.href.indexOf('#');
+                var anchor = '';
+                if (anchorIndex !== -1) {
+                    anchor = item.href.substring(anchorIndex);
+                    item.href = item.href.substring(0, anchorIndex);
+                }
+                if (item.href.indexOf('?') === -1) {
+                    item.href += '?' + utmParamQueryString.toString() + anchor;
+                } else {
+                    item.href += '&' + utmParamQueryString.toString() + anchor;
+                }
+            }
+        });
+    }
+})();
+</script>
 </body>
 </html>
