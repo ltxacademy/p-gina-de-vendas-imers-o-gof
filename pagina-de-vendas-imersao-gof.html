@@ -228,8 +228,11 @@ section{padding:80px 0;}
 .inscription-inner>p{color:var(--muted);font-size:16px;margin-bottom:32px;}
 .price-card{background:var(--dark3);border:1px solid var(--border-teal);border-radius:16px;padding:32px;}
 .price-label{font-size:11px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--teal);margin-bottom:16px;}
-.price-main{font-family:'Playfair Display',serif;font-size:64px;font-weight:700;color:var(--white);line-height:1;margin-bottom:24px;}
-.price-main sup{font-size:28px;vertical-align:super;}
+.price-old{font-size:18px;color:var(--cr);text-decoration:line-through;margin-bottom:4px;font-weight:500;display:block;}
+.price-main{font-family:'Playfair Display',serif;font-size:68px;font-weight:900;color:var(--white);line-height:1;margin-bottom:8px;}
+.price-main .price-small{font-size:22px;font-weight:400;color:var(--muted);margin-right:4px;vertical-align:middle;letter-spacing:0;}
+.price-main .currency{font-size:24px;font-weight:400;vertical-align:baseline;margin-right:2px;}
+.price-sub{font-size:18px;color:var(--muted);margin-top:12px;margin-bottom:32px;display:block;font-weight:400;}
 .includes{list-style:none;text-align:left;margin-bottom:24px;}
 .includes li{display:flex;align-items:flex-start;gap:10px;font-size:14px;color:var(--muted);padding:9px 0;border-bottom:1px solid var(--border);}
 .includes li:last-child{border-bottom:none;}
@@ -251,8 +254,7 @@ section{padding:80px 0;}
 .final-cta-inner>p{color:var(--muted);font-size:16px;margin-bottom:32px;}
 footer{background:var(--black);border-top:1px solid var(--border);padding:32px 24px;text-align:center;font-size:12px;color:var(--muted);line-height:1.9;}
 footer a{color:var(--muted);text-decoration:none;}
-.sticky-cta{position:fixed;bottom:0;left:0;right:0;background:var(--dark2);border-top:1px solid var(--border-teal);padding:12px 20px;z-index:99;opacity:0;pointer-events:none;transform:translateY(20px);transition:all 0.3s ease;}
-.sticky-cta .btn-primary{max-width:400px;margin:0 auto;}
+
 @media(max-width:768px){
   .stats-grid{grid-template-columns:1fr 1fr;}
   .parts-grid{grid-template-columns:1fr;}
@@ -532,7 +534,9 @@ footer a{color:var(--muted);text-decoration:none;}
       <p>Este não é um evento para juntar multidão. É uma imersão para transformar quem entra, e isso só funciona com grupos pequenos.</p>
       <div class="price-card">
         <div class="price-label">Imersao GOF &middot; 1 dia presencial</div>
-        <div class="price-main"><sup>R$</sup>497</div>
+        <div class="price-old">De R$ 997,00</div>
+        <div class="price-main"><span class="price-small">12x de</span> <span class="currency">R$</span>51,40</div>
+        <div class="price-sub">ou R$ 497,00 à vista</div>
         <ul class="includes">
           <li>Imersao presencial de 1 dia completo com Leo Soares</li>
           <li>Conteudo exclusivo que nao esta disponivel online</li>
@@ -541,8 +545,8 @@ footer a{color:var(--muted);text-decoration:none;}
           <li>Networking com profissionais e empresarios de Fortaleza</li>
           <li>Garantia incondicional de 7 dias</li>
         </ul>
-        <a href="https://payment.ticto.app/O2450382A" class="btn-primary">GARANTIR MINHA VAGA, R$ 497 &rarr;</a>
-        <a href="#" class="btn-ghost">Tenho dúvidas, falar com um consultor</a>
+        <a href="https://payment.ticto.app/O2450382A" class="btn-primary">GARANTIR MINHA VAGA, 12x de R$ 51,40 &rarr;</a>
+        <a href="https://wa.me/5585920063684" class="btn-ghost" target="_blank">Tenho dúvidas, falar com um consultor</a>
         <p class="safe-note" style="margin-top:12px;">&#128274; Compra 100% segura &middot; Garantia de 7 dias &middot; Vagas limitadas</p>
       </div>
     </div>
@@ -569,7 +573,7 @@ footer a{color:var(--muted);text-decoration:none;}
       <div class="sec-label" style="justify-content:center;">Última chamada</div>
       <h2>O mercado não vai<br>te esperar. <em>As vagas, também não.</em></h2>
       <p>Você chegou até aqui porque algo fez sentido. Não deixe a dúvida ganhar da decisão. Apenas 30 vagas.</p>
-      <a href="#inscricao" class="btn-primary" style="max-width:440px;margin:0 auto;">GARANTIR MINHA VAGA, R$ 497 &rarr;</a>
+      <a href="#inscricao" class="btn-primary" style="max-width:440px;margin:0 auto;">GARANTIR MINHA VAGA, 12x de R$ 51,40 &rarr;</a>
       <p style="font-size:12px;color:var(--muted);margin-top:14px;">&#128274; Garantia de 7 dias &middot; Compra 100% segura &middot; Suporte via WhatsApp</p>
     </div>
   </div>
@@ -581,25 +585,10 @@ footer a{color:var(--muted);text-decoration:none;}
   <p style="margin-top:8px;"><a href="#">Termos de Uso</a> &middot; <a href="#">Política de Privacidade</a></p>
 </footer>
 
-<div class="sticky-cta">
-  <a href="#inscricao" class="btn-primary" style="font-size:14px;padding:14px 20px;">GARANTIR MINHA VAGA, R$ 497 &rarr;</a>
-</div>
+
 
 <script>
-window.addEventListener('scroll', function() {
-    var sticky = document.querySelector('.sticky-cta');
-    if (sticky) {
-        if (window.scrollY > 300) {
-            sticky.style.opacity = '1';
-            sticky.style.pointerEvents = 'auto';
-            sticky.style.transform = 'translateY(0)';
-        } else {
-            sticky.style.opacity = '0';
-            sticky.style.pointerEvents = 'none';
-            sticky.style.transform = 'translateY(20px)';
-        }
-    }
-});
+
 
 (function(){
   var KEY='gof_ub_13d_end';
