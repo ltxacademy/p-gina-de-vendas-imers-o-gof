@@ -89,6 +89,23 @@ section{padding:80px 0;}
 .no-tag{display:inline-flex;align-items:center;gap:5px;font-size:12px;font-weight:500;padding:6px 14px;border-radius:100px;background:var(--red-dim);border:1px solid rgba(224,85,85,.22);color:#E07070;}
 .no-tag::before{content:'x';font-size:9px;font-weight:800;}
 .hero-cta{max-width:420px;}
+/* HERO ANIMATED BG */
+.glow-base { position: absolute; bottom: -15%; left: 50%; width: 120%; height: 60vh; background: radial-gradient(circle at center, rgba(0, 200, 160, 0.35) 0%, transparent 70%); filter: blur(100px); transform: translateX(-50%); z-index: 0; pointer-events: none; }
+.glow-core { position: absolute; bottom: -10%; left: 50%; width: 60%; height: 40vh; background: radial-gradient(circle at center, rgba(0, 200, 160, 0.3) 0%, transparent 60%); filter: blur(60px); transform: translateX(-50%); z-index: 0; pointer-events: none; }
+.dot-grid { position: absolute; top: 0; left: 0; right: 0; bottom: 0; z-index: 0; pointer-events: none; opacity: 0.1; background-image: radial-gradient(#ffffff 1px, transparent 1px); background-size: 32px 32px; mask-image: radial-gradient(ellipse at center, black 50%, transparent 100%); -webkit-mask-image: radial-gradient(ellipse at center, black 50%, transparent 100%); }
+@keyframes beam-rise-v2 { 0% { transform: translateY(110vh) rotate(-2deg); opacity: 0; } 30% { opacity: 0.9; } 70% { opacity: 0.9; } 100% { transform: translateY(-100vh) rotate(2deg); opacity: 0; } }
+.animate-beam-v2 { animation: beam-rise-v2 4s cubic-bezier(0.2, 0, 0.3, 1) infinite; }
+@keyframes particle-drift { 0% { transform: translateY(100vh) scale(0.5); opacity: 0; } 50% { opacity: 1; } 100% { transform: translateY(-20vh) scale(1.2); opacity: 0; } }
+.particle-v2 { position: absolute; background: var(--teal); border-radius: 50%; pointer-events: none; filter: blur(1px); box-shadow: 0 0 15px var(--teal); z-index: 0; }
+.beam-container { position: absolute; top: 0; left: 0; right: 0; bottom: 0; pointer-events: none; z-index: 0; }
+.beam-grid { display: grid; grid-template-columns: repeat(5, 1fr); width: 100%; height: 100%; opacity: 0.3; }
+.beam-col { position: relative; }
+.beam { position: absolute; bottom: 0; right: 0; width: 2px; }
+.beam-1 { height: 288px; background: linear-gradient(to top, transparent, rgba(0,200,160,0.8), transparent); }
+.beam-2 { height: 384px; background: linear-gradient(to top, transparent, rgba(0,200,160,0.6), transparent); animation-delay: 1.5s; animation-duration: 5s; }
+.beam-3 { height: 240px; background: linear-gradient(to top, transparent, rgba(0,200,160,1), transparent); animation-delay: 3s; }
+.beam-4 { height: 440px; background: linear-gradient(to top, transparent, rgba(0,200,160,0.9), transparent); animation-delay: 0.5s; animation-duration: 6s; }
+.beam-5 { height: 320px; background: linear-gradient(to top, transparent, rgba(0,200,160,0.7), transparent); animation-delay: 4.5s; }
 /* STATS */
 .stats-strip{background:var(--dark2);padding:0;}
 .stats-grid{display:grid;grid-template-columns:repeat(4,1fr);border:1px solid var(--border);background:var(--border);}
@@ -321,6 +338,19 @@ footer a{color:var(--muted);text-decoration:none;}
   </div>
 </div>
 <section class="hero">
+  <div class="glow-base"></div>
+  <div class="glow-core"></div>
+  <div class="dot-grid"></div>
+  <div class="beam-container">
+    <div class="beam-grid">
+      <div class="beam-col"><div class="beam beam-1 animate-beam-v2"></div></div>
+      <div class="beam-col"><div class="beam beam-2 animate-beam-v2"></div></div>
+      <div class="beam-col"><div class="beam beam-3 animate-beam-v2"></div></div>
+      <div class="beam-col"><div class="beam beam-4 animate-beam-v2"></div></div>
+      <div class="beam-col"><div class="beam beam-5 animate-beam-v2"></div></div>
+    </div>
+    <div id="particles-v2" style="position: absolute; top: 0; left: 0; right: 0; bottom: 0;"></div>
+  </div>
   <div class="container">
     <div class="hero-inner">
       <div class="hero-badge">Imersão Presencial &middot; 30 Vagas &middot; Eusébio, CE</div>
@@ -655,6 +685,22 @@ document.querySelectorAll('.faq-q').forEach(function(q){
     if(!open) item.classList.add('open');
   });
 });
+
+  const container=document.getElementById('particles-v2');
+  if(container) {
+    const count=25;
+    for(let i=0;i<count;i++){
+      const p=document.createElement('div');
+      p.className='particle-v2';
+      const size=Math.random()*4+2+'px';
+      p.style.width=size;
+      p.style.height=size;
+      p.style.left=Math.random()*100+'%';
+      p.style.animation=`particle-drift ${Math.random()*4+4}s ease-out infinite`;
+      p.style.animationDelay=Math.random()*6+'s';
+      container.appendChild(p);
+    }
+  }
 </script>
 <script>
 (function() {
